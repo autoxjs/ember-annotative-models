@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/autoxjs/ember-annotative-models",
   "engines": {
     "node": ">= 0.10.0"
   },
