@@ -1,6 +1,26 @@
 # Ember-annotative-models
 
-This README outlines the details of collaborating on this Ember addon.
+Introduces the concept of fields to models and allows for extremely annotatative models
+
+## Dependencies
+```sh
+ember-concurrency
+ember-autox-core
+ember-lodash
+ember-router-dsl
+```
+Because actions use es6 generators, be sure to include that in the polyfill
+```javascript
+var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+
+module.exports = function(defaults) {
+  var app = new EmberAddon(defaults, {
+    babel: { includePolyfill: true }
+  });
+
+  return app.toTree();
+};
+```
 
 ## Installation
 
