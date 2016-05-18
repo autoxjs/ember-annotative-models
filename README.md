@@ -1,6 +1,8 @@
 # Ember-annotative-models
 
-Introduces the concept of fields to models and allows for extremely annotatative models
+Introduces the concept of fields to models and allows for extremely annotative models
+
+automatically registers fields based upon the models you have declared in your routes
 
 ## Dependencies
 ```sh
