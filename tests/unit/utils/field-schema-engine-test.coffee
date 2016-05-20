@@ -2,8 +2,10 @@
 `import moment from 'moment'`
 `import {getFieldCollection} from 'ember-annotative-models/utils/field-schema-engine'`
 `import { moduleForModel, test } from 'ember-qunit'`
+`import {initialize} from 'ember-annotative-models/initializers/annotative-model-extension'`
 
 moduleForModel 'game', 'Unit | Utility | field schema engine',
+  before: -> initialize()
   needs: [
     'model:game'
     'model:app'
@@ -32,9 +34,9 @@ test "it should spit out the fields", (assert) ->
     collection = collectionClass.create()
     assert.ok collection, "collections are created"
 
-    fieldClasses = collectionClass.fieldClasses
+    fieldClasses = collection.get "fieldClasses"
     assert.ok fieldClasses, "we should have fieldClasses"
-    assert.equal fieldClasses.get("length"), 4, "we have 4 fields"
+    assert.equal fieldClasses.get("length"), 7, "we have 7 fields"
     for fieldClass in fieldClasses
       assert.ok fieldClass.fieldName, "we should have field names"
       assert.ok fieldClass.create, "field classes should be createable"
@@ -43,9 +45,9 @@ test "it should spit out the fields", (assert) ->
     assert.ok fields
     assert.ok fields.sortBy, "fields should be sortable"
     sortedFields = fields.sortBy "priority"
-    assert.equal sortedFields.get("length"), 4, "THERE ARE 4 LIGHTS"
+    assert.equal sortedFields.get("length"), 7, "THERE ARE 7 LIGHTS"
 
-    [aboutField, titleField, esrbField, progressField] = sortedFields.toArray()
+    [..., aboutField, titleField, esrbField, progressField] = sortedFields.toArray()
     assert.ok aboutField, "aboutField should be there"
     assert.ok titleField, "titleField should be there"
     assert.ok esrbField, "esrbField should be there"

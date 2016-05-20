@@ -18,7 +18,7 @@ C1 =
         map.set name, meta
     map
 C2 =
-  RichModelExtensionEnabled: true
+  AnnotativeModelExtensionEnabled: true
   eachVirtualAttribute: (callback, binding) ->
     get(@, "virtualAttributes").forEach (meta, name) ->
       callback.call binding, name, meta

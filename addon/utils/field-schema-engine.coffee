@@ -3,6 +3,7 @@
 `import ActionField from '../models/action-field'`
 `import RelationField from '../models/relation-field'`
 `import _ from 'lodash/lodash'`
+`import FieldsCollectionBase from '../models/fields-collection'`
 {A, Object, computed, isPresent, isArray, inject, String} = Ember
 {chain, tap, partial, merge, partialRight, invoke} = _
 
@@ -50,33 +51,8 @@ getFields = (factory) ->
   .value()
 
 getFieldCollection = (factory) ->
-  FieldCollection = Object.extend
-    lookup: inject.service "lookup"
-    priorityAsc: ["priority:asc"]
-    sortedFields: computed.sort "fields", "priorityAsc"
-    fields: computed "constructor.modelName", "constructor.fieldClasses", "lookup", ->
-      lookup = @get "lookup"
-      Ember.assert "has lookup service", isPresent lookup
-      modelName = @constructor.modelName
-      Ember.assert "has model name", isPresent(modelName)
-      nameBase = "field:#{modelName}"
-      chain @constructor.fieldClasses
-      .tap (classes) -> Ember.assert "has field classes", isArray(classes)
-      .tap (classes) -> Ember.assert "no shitty blank fields", classes.every isPresent
-      .map (field) -> 
-        chain(field.fieldName)
-        .tap (name) -> Ember.assert "name should be present", isPresent name
-        .value()
-      .map (fieldName) -> nameBase + "/" + fieldName
-      .map lookup.other.bind(lookup)
-      .tap (fields) -> Ember.assert "should be a proper array", isArray(fields)
-      .tap (fields) -> Ember.assert "all fields are registered", fields.every(isPresent)
-      .value()
-
-  FieldCollection.reopenClass
+  FieldsCollectionBase.extend
     modelName: factory.modelName
     fieldClasses: getFields(factory)
-  
-  FieldCollection
 
 `export {getFields, getFieldCollection, getActionFields, getVirtualFields, getAttributeFields, getIdField, aboutMeDefault}`

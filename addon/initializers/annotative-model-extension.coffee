@@ -1,9 +1,9 @@
 `import Ember from 'ember'`
 `import DS from 'ember-data'`
 `import {Core} from '../mixins/rich-model'`
-# Takes two parameters: container and application
+
 initialize = ->
-  return if Ember.get(DS.Model, "RichModelExtensionEnabled")
+  return if Ember.get(DS.Model, "AnnotativeModelExtensionEnabled")
   DS.Model.reopenClass Core
 
 RichModelExtensionInitializer =

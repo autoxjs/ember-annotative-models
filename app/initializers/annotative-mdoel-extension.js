@@ -1,0 +1,1 @@
+export {default, initialize} from 'ember-annotative-models/initializers/annotative-model-extension';
