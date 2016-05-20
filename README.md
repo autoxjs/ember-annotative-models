@@ -37,7 +37,6 @@ this.store.fieldsFor "friend"
 ember-concurrency
 ember-autox-core
 ember-lodash
-ember-router-dsl
 ```
 Because actions use es6 generators, be sure to include that in the polyfill
 ```javascript
